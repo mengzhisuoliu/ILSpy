@@ -14,10 +14,11 @@
 	MinHeight="200"
 	UseLayoutRounding="True"
 	TextOptions.TextFormattingMode="Display"
-	Style="{StaticResource {x:Static styles:ResourceKeys.WindowStyle}}"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" d:DesignHeight="500" d:DesignWidth="500"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
 	xmlns:styles="urn:TomsToolbox.Wpf.Styles"
+	xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
+	xmlns:themes="clr-namespace:ICSharpCode.ILSpy.Themes"
 	d:DataContext="{d:DesignInstance local:MainWindowDataContext}"
 >
 	<Window.Resources>
@@ -63,6 +64,9 @@
 		<controls:CultureSelectionConverter x:Key="cultureSelectionConverter" />
 
 	</Window.Resources>
+	<b:Interaction.Behaviors>
+		<themes:WindowStyleManagerBehavior />
+	</b:Interaction.Behaviors>
 
 	<Window.CommandBindings>
 		<CommandBinding
@@ -103,7 +107,7 @@
 				<MenuItem Header="{x:Static properties:Resources.Show_internalTypesMembers}" IsCheckable="True" IsChecked="{Binding SessionSettings.FilterSettings.ApiVisPublicAndInternal}" />
 				<MenuItem Header="{x:Static properties:Resources.Show_allTypesAndMembers}" IsCheckable="True" IsChecked="{Binding SessionSettings.FilterSettings.ApiVisAll}" />
 				<Separator/>
-				<MenuItem Header="Language">
+				<MenuItem Header="{x:Static properties:Resources.Language}">
 					<MenuItem Header="{x:Static properties:Resources.UILanguage_System}" IsCheckable="True" IsChecked="{Binding SessionSettings.CurrentCulture, Converter={StaticResource cultureSelectionConverter}, ConverterParameter={x:Null}}" />
 					<MenuItem Header="English" IsCheckable="True" IsChecked="{Binding SessionSettings.CurrentCulture, Converter={StaticResource cultureSelectionConverter}, ConverterParameter=en-US}" />
 					<MenuItem Header="中文" IsCheckable="True" IsChecked="{Binding SessionSettings.CurrentCulture, Converter={StaticResource cultureSelectionConverter}, ConverterParameter=zh-Hans}" />
